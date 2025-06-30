@@ -23,5 +23,17 @@
   <script src="libs/aos.min.js"></script>
   <script src="script.js"></script>
   <script src="chart.js"></script>
+<div id="addModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Add Breach for <span id="modalCompanyName"></span></h2>
+    <input type="text" id="modalYear" placeholder="Year (e.g. 2023)" />
+    <input type="text" id="modalRecords" placeholder="Records (e.g. 10 million)" />
+    <input type="text" id="modalData" placeholder="Data types (e.g. emails, passwords)" />
+    <textarea id="modalDescription" placeholder="Short description..."></textarea>
+    <button onclick="submitNewBreach()">➕ Add Breach</button>
+    <button onclick="closeModal()">❌ Cancel</button>
+  </div>
+</div>
+
 </body>
 </html>
