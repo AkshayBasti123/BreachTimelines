@@ -1,1 +1,32 @@
-
+{
+  "facebook": [
+    {
+      "year": "2019",
+      "records": "540 million",
+      "data": "User IDs, likes",
+      "description": "Third-party app leaked massive user data on cloud servers."
+    },
+    {
+      "year": "2018",
+      "records": "50 million",
+      "data": "Access tokens",
+      "description": "Vulnerability in 'View As' exposed access tokens."
+    }
+  ],
+  "adobe": [
+    {
+      "year": "2013",
+      "records": "153 million",
+      "data": "Emails, encrypted passwords",
+      "description": "Source code and user data leaked in major breach."
+    }
+  ],
+  "linkedin": [
+    {
+      "year": "2021",
+      "records": "700 million",
+      "data": "Public profile scraping",
+      "description": "Exposed user profiles through API abuse."
+    }
+  ]
+}
