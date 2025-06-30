@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Breach History Timeline</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="libs/aos.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container">
     <h1>📉 Breach History Timeline</h1>
-    <input type="text" id="searchInput" placeholder="Enter a company name (e.g. Facebook)" />
+    <input type="text" id="searchInput" placeholder="Search a company (e.g. Facebook)" />
     <button onclick="searchCompany()">Search</button>
-    
+    <button onclick="toggleGraph()">📊 Toggle Graph View</button>
+    <a href="admin.html" class="admin-link">🛠️ Admin Panel</a>
+
     <div id="timeline"></div>
+    <canvas id="breachChart" class="hidden"></canvas>
   </div>
 
+  <script src="libs/aos.min.js"></script>
   <script src="script.js"></script>
+  <script src="chart.js"></script>
 </body>
 </html>
