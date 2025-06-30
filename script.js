@@ -1,6 +1,18 @@
 AOS.init();
+let staticData = {};
+let localData = JSON.parse(localStorage.getItem("breaches")) || {};
+let currentCompany = "";
 
-async function searchCompany() {
+async function loadData() {
+  const res = await fetch("data.json");
+  staticData = await res.json();
+}
+
+function getCombinedData() {
+  return { ...staticData, ...localData };
+}
+
+function searchCompany() {
   const input = document.getElementById("searchInput").value.trim().toLowerCase();
   const timeline = document.getElementById("timeline");
   const chart = document.getElementById("breachChart");
@@ -11,11 +23,11 @@ async function searchCompany() {
     return;
   }
 
-  const res = await fetch("data.json");
-  const data = await res.json();
+  const data = getCombinedData();
 
   if (!data[input]) {
-    timeline.innerHTML = "<p>🚫 No breach history found for this company.</p>";
+    showAddModal(input);
+    timeline.innerHTML = "<p>🚫 No breaches found. You can add one below.</p>";
     return;
   }
 
@@ -33,3 +45,43 @@ async function searchCompany() {
   timeline.innerHTML = entries;
   AOS.refresh();
 }
+
+function showAddModal(company) {
+  currentCompany = company;
+  document.getElementById("modalCompanyName").innerText = company;
+  document.getElementById("addModal").classList.remove("hidden");
+}
+
+function closeModal() {
+  document.getElementById("addModal").classList.add("hidden");
+  document.getElementById("modalYear").value = "";
+  document.getElementById("modalRecords").value = "";
+  document.getElementById("modalData").value = "";
+  document.getElementById("modalDescription").value = "";
+}
+
+function submitNewBreach() {
+  const year = document.getElementById("modalYear").value.trim();
+  const records = document.getElementById("modalRecords").value.trim();
+  const data = document.getElementById("modalData").value.trim();
+  const description = document.getElementById("modalDescription").value.trim();
+
+  if (!year || !records || !data || !description) {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  const newBreach = { year, records, data, description };
+
+  if (!localData[currentCompany]) {
+    localData[currentCompany] = [];
+  }
+
+  localData[currentCompany].push(newBreach);
+  localStorage.setItem("breaches", JSON.stringify(localData));
+
+  closeModal();
+  searchCompany();
+}
+
+loadData();
