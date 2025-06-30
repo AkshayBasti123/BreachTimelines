@@ -1,1 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin – Edit Breach Data</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🛠️ Admin Panel</h1>
+    <textarea id="editor" rows="25" style="width:100%;"></textarea><br>
+    <button onclick="save()">💾 Download JSON</button>
+    <p class="admin-link"><a href="index.html">← Back to Timeline</a></p>
+  </div>
 
+  <script>
+    async function loadData() {
+      const res = await fetch("data.json");
+      const data = await res.json();
+      document.getElementById("editor").value = JSON.stringify(data, null, 2);
+    }
+
+    function save() {
+      const blob = new Blob([document.getElementById("editor").value], {type: "application/json"});
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "data.json";
+      link.click();
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
